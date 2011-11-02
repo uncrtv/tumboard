@@ -46,12 +46,19 @@ function tb_deselectPost(idx)
  *
  * Key code table
  * --------------
+<<<<<<< HEAD
  * D: Go back to page 1 of dashboard. 
+=======
+ * D: Go to page 1 of dashboard. 
+>>>>>>> cffa33b3bc518d9573d9cb15dad1909ab8d50c3e
  * j: Scroll down a post.
  * J: Scroll to last post in page.
  * k: Scroll up a post.
  * K: Scroll to first post in a page.
+<<<<<<< HEAD
  * i: Scroll to post currently selected.
+=======
+>>>>>>> cffa33b3bc518d9573d9cb15dad1909ab8d50c3e
  * l: "Like"/heart a post.
  */
 function tb_keyHandler(e)
