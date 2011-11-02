@@ -46,10 +46,19 @@ function tb_deselectPost(idx)
  *
  * Key code table
  * --------------
- * 
+ * D: Go back to page 1 of dashboard. 
+ * j: Scroll down a post.
+ * J: Scroll to last post in page.
+ * k: Scroll up a post.
+ * K: Scroll to first post in a page.
+ * i: Scroll to post currently selected.
+ * l: "Like"/heart a post.
  */
 function tb_keyHandler(e)
 {
+    // Don't mess up text input
+    if (document.activeElement.nodeName == 'TEXTAREA' || document.activeElement.nodeName == 'INPUT') return;    
+
     // Grab the key code
     if (!e) var e = window.event;
     if (e.keyCode) var code = e.keyCode;
@@ -58,16 +67,31 @@ function tb_keyHandler(e)
     switch (code)
     {
         case 68:    // d
-            window.location = "http://www.tumblr.com/dashboard";
+            if (e.shiftKey) window.location = "http://www.tumblr.com/dashboard";
+            break;
 
         case 74:    // j
             $("html, body").stop();
 
-            tb_deselectPost(tb_cPost);
-            
-            (tb_cPost < tb_maxPost) ? tb_cPost += 1 : tb_cPost = 0;
-            tb_selectPost(tb_cPost);
-            $("html, body").animate({"scrollTop" : tb_post(tb_cPost).offset().top - 10}, 0); // Scroll
+            if (e.shiftKey)
+            {
+                tb_deselectPost(tb_cPost);
+                tb_cPost = tb_maxPost;
+                tb_selectPost(tb_cPost);
+                $("html, body").animate({"scrollTop" : tb_post(tb_cPost).offset().top - 10}, 0); // scroll
+            }
+            else
+            {
+                if (tb_cPost < tb_maxPost)
+                {
+                    tb_deselectPost(tb_cPost);
+                    tb_cPost += 1;
+                    tb_selectPost(tb_cPost);
+                    $("html, body").animate({"scrollTop" : tb_post(tb_cPost).offset().top - 10}, 0); // Scroll
+                }
+                else if ($("a#next_page_link").attr("href") !== undefined)
+                    window.location = "http://www.tumblr.com" + $("a#next_page_link").attr("href");
+            }
 
             e.stopPropagation();
             break;
@@ -75,11 +99,25 @@ function tb_keyHandler(e)
         case 75:    // k
             $("html, body").stop();
 
-            tb_deselectPost(tb_cPost);
-            
-            (tb_cPost >= 0) ? tb_cPost -= 1 : tb_cPost = tb_maxPost-1;
-            tb_selectPost(tb_cPost);
-            $("html, body").animate({"scrollTop" : tb_post(tb_cPost).offset().top - 10}, 0); // Scroll
+            if (e.shiftKey)
+            {
+                tb_deselectPost(tb_cPost);
+                tb_cPost = 0;
+                tb_selectPost(tb_cPost);
+                $("html, body").animate({"scrollTop" : tb_post(tb_cPost).offset().top - 10}, 0); // scroll
+            }
+            else
+            {
+                if (tb_cPost > 0)
+                {
+                    tb_deselectPost(tb_cPost);
+                    tb_cPost -= 1;
+                    tb_selectPost(tb_cPost);
+                    $("html, body").animate({"scrollTop" : tb_post(tb_cPost).offset().top - 10}, 0); // Scroll
+                }
+                else if ($("a#previous_page_link").attr("href") !== undefined)
+                    window.location = "http://www.tumblr.com" + $("a#previous_page_link").attr("href");
+            }
 
             e.stopPropagation();
             break;
