@@ -68,6 +68,14 @@ function tb_keyHandler(e)
     {
         case 68:    // d
             if (e.shiftKey) window.location = "http://www.tumblr.com/dashboard";
+
+            e.stopPropagation();
+            break;
+
+        case 73:    // i
+            $("html, body").animate({"scrollTop" : tb_post(tb_cPost).offset().top - 10}, 0); // Scroll
+
+            e.stopPropagation();
             break;
 
         case 74:    // j
@@ -137,3 +145,11 @@ tb_selectPost(tb_cPost);
 
 // Add keydown event handler
 document.addEventListener('keydown', tb_keyHandler, true);
+
+// Add click events for post
+$("ol#posts li[id*=post_]").click(function() {
+    var idx = $("ol#posts li[id*=post_]").index(this);
+    tb_deselectPost(tb_cPost);
+    tb_cPost = idx;
+    tb_selectPost(tb_cPost);
+});
