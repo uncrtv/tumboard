@@ -28,6 +28,10 @@
 				<string>tumboard.js</string>
 			</array>
 		</dict>
+		<key>Stylesheets</key>
+		<array>
+			<string>tumboard.style.css</string>
+		</array>
 		<key>Whitelist</key>
 		<array>
 			<string>http://www.tumblr.com/dashboard*</string>
