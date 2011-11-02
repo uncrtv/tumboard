@@ -1,1 +1,11 @@
 Work in progress.
+
+Current keyboard shortcuts:
+---------------------------
+ * D: Go back to page 1 of dashboard. 
+ * j: Scroll down a post.
+ * J: Scroll to last post in page.
+ * k: Scroll up a post.
+ * K: Scroll to first post in a page.
+ * i: Scroll to post currently selected.
+ * l: "Like"/heart a post.
