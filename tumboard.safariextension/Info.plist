@@ -24,6 +24,7 @@
 		<dict>
 			<key>End</key>
 			<array>
+				<string>jquery.min.js</string>
 				<string>tumboard.js</string>
 			</array>
 		</dict>
