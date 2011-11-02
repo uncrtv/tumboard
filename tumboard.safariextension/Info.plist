@@ -21,7 +21,16 @@
 	<key>Content</key>
 	<dict>
 		<key>Scripts</key>
-		<dict/>
+		<dict>
+			<key>End</key>
+			<array>
+				<string>tumboard.js</string>
+			</array>
+		</dict>
+		<key>Whitelist</key>
+		<array>
+			<string>http://www.tumblr.com/dashboard*</string>
+		</array>
 	</dict>
 	<key>Description</key>
 	<string>Keyboard shortcuts for your Dashboard.</string>
