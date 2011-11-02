@@ -35,6 +35,7 @@
 		<key>Whitelist</key>
 		<array>
 			<string>http://www.tumblr.com/dashboard*</string>
+			<string>http://www.tumblr.com/likes*</string>
 		</array>
 	</dict>
 	<key>Description</key>

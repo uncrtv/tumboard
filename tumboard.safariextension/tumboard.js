@@ -43,6 +43,10 @@ function tb_deselectPost(idx)
 /*
  * Function: keydown event handler
  * Input   : event object
+ *
+ * Key code table
+ * --------------
+ * 
  */
 function tb_keyHandler(e)
 {
@@ -53,6 +57,9 @@ function tb_keyHandler(e)
 
     switch (code)
     {
+        case 68:    // d
+            window.location = "http://www.tumblr.com/dashboard";
+
         case 74:    // j
             $("html, body").stop();
 
@@ -70,11 +77,15 @@ function tb_keyHandler(e)
 
             tb_deselectPost(tb_cPost);
             
-            (tb_cPost >= 0) ? tb_cPost -= 1 : tb_cPost = tb_maxPost;
+            (tb_cPost >= 0) ? tb_cPost -= 1 : tb_cPost = tb_maxPost-1;
             tb_selectPost(tb_cPost);
             $("html, body").animate({"scrollTop" : tb_post(tb_cPost).offset().top - 10}, 0); // Scroll
 
             e.stopPropagation();
+            break;
+        
+        case 76:    // l
+            tb_post(tb_cPost).find("a[id*=like_button_]").trigger("click");
             break;
     }
 }
