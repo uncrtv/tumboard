@@ -13,7 +13,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>0.1</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>Chrome</key>
@@ -21,7 +21,22 @@
 	<key>Content</key>
 	<dict>
 		<key>Scripts</key>
-		<dict/>
+		<dict>
+			<key>End</key>
+			<array>
+				<string>jquery.min.js</string>
+				<string>tumboard.js</string>
+			</array>
+		</dict>
+		<key>Stylesheets</key>
+		<array>
+			<string>tumboard.style.css</string>
+		</array>
+		<key>Whitelist</key>
+		<array>
+			<string>http://www.tumblr.com/dashboard*</string>
+			<string>http://www.tumblr.com/likes*</string>
+		</array>
 	</dict>
 	<key>Description</key>
 	<string>Keyboard shortcuts for your Dashboard.</string>

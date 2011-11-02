@@ -1,0 +1,13 @@
+/*******************************************************************************
+ * tumboard.style.css
+ * tumboard - Keyboard shortcut for Tumblr dashboard.
+ * 
+ * Tom Cat, 2011.
+ ******************************************************************************/
+
+ol#posts .post
+{
+    /* CSS3 animation */
+    -webkit-transition: -webkit-box-shadow 0.5s linear;
+    transition:         box-shadow         0.5s linear;
+}
