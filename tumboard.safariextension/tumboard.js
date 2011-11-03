@@ -166,7 +166,10 @@ function tb_keyHandler(e)
         case 79:    // o
             url = tb_post(tb_cPost).find("a[id*=permalink]").attr("href");
             if (url !== undefined)
+            {
                 window.open(url);
+                e.preventDefault();
+            }
             break;
 
         case 82:    // r
