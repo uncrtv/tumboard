@@ -36,6 +36,7 @@
 		<array>
 			<string>http://www.tumblr.com/dashboard*</string>
 			<string>http://www.tumblr.com/likes*</string>
+			<string>http://www.tumblr.com/tagged*</string>
 		</array>
 	</dict>
 	<key>Description</key>

@@ -25,9 +25,14 @@ function tb_post(idx)
  */
 function tb_selectPost(idx)
 {
-    tb_post(idx).attr("tb_selected", "true")
-                .css({"-webkit-box-shadow" : "0px 1px 20px #fff",
-                      "box-shadow" : "0px 1px 20px #fff"});
+    if ((idx !== 0) & (idx !== tb_maxPost))
+        tb_post(idx).attr("tb_selected", "true")
+                    .css({"-webkit-box-shadow" : "0px 1px 30px #fff",
+                          "box-shadow" : "0px 1px 30px #fff"});
+    else
+        tb_post(idx).attr("tb_selected", "true")
+                    .css({"-webkit-box-shadow" : "0px 1px 30px #000",
+                          "box-shadow" : "0px 1px 30px #000"});
 }
 
 /*
@@ -53,6 +58,11 @@ function tb_deselectPost(idx)
  * K: Scroll to first post in a page.
  * i: Scroll to post currently selected.
  * l: "Like"/heart a post.
+ * r: Reblog a post.
+ * R: Reply to post (if applicable).
+ * n: Show post's notes.
+ * e: Expand inline images.
+ * o: Open post's permalink in new window/tab.
  */
 function tb_keyHandler(e)
 {
@@ -71,11 +81,26 @@ function tb_keyHandler(e)
 
             e.stopPropagation();
             break;
+        
+        case 69:    // e
+            var image = tb_post(tb_cPost).find("img[class*=inline_image]"); 
+            if (image.hasClass("inline_image"))
+            {
+                image.removeClass("inline_image");
+                image.addClass("exp_inline_image");
+            }
+            else if (image.hasClass("exp_inline_image"))
+            {
+                image.addClass("inline_image");
+                image.removeClass("exp_inline_image");
+            }
+
+            tb_post(tb_cPost).find("img.inline_external_image").trigger("click");
+
+            break;
 
         case 73:    // i
-            $("html, body").animate({"scrollTop" : tb_post(tb_cPost).offset().top - 10}, 0); // Scroll
-
-            e.stopPropagation();
+            $("html, body").animate({"scrollTop" : tb_post(tb_cPost).offset().top - 5}, 500); // Scroll
             break;
 
         case 74:    // j
@@ -86,7 +111,7 @@ function tb_keyHandler(e)
                 tb_deselectPost(tb_cPost);
                 tb_cPost = tb_maxPost;
                 tb_selectPost(tb_cPost);
-                $("html, body").animate({"scrollTop" : tb_post(tb_cPost).offset().top - 10}, 0); // scroll
+                $("html, body").animate({"scrollTop" : tb_post(tb_cPost).offset().top - 5}, 500); // scroll
             }
             else
             {
@@ -95,7 +120,7 @@ function tb_keyHandler(e)
                     tb_deselectPost(tb_cPost);
                     tb_cPost += 1;
                     tb_selectPost(tb_cPost);
-                    $("html, body").animate({"scrollTop" : tb_post(tb_cPost).offset().top - 10}, 0); // Scroll
+                    $("html, body").animate({"scrollTop" : tb_post(tb_cPost).offset().top - 5}, 0); // Scroll
                 }
                 else if ($("a#next_page_link").attr("href") !== undefined)
                     window.location = "http://www.tumblr.com" + $("a#next_page_link").attr("href");
@@ -112,7 +137,7 @@ function tb_keyHandler(e)
                 tb_deselectPost(tb_cPost);
                 tb_cPost = 0;
                 tb_selectPost(tb_cPost);
-                $("html, body").animate({"scrollTop" : tb_post(tb_cPost).offset().top - 10}, 0); // scroll
+                $("html, body").animate({"scrollTop" : tb_post(tb_cPost).offset().top - 5}, 500); // scroll
             }
             else
             {
@@ -121,7 +146,7 @@ function tb_keyHandler(e)
                     tb_deselectPost(tb_cPost);
                     tb_cPost -= 1;
                     tb_selectPost(tb_cPost);
-                    $("html, body").animate({"scrollTop" : tb_post(tb_cPost).offset().top - 10}, 0); // Scroll
+                    $("html, body").animate({"scrollTop" : tb_post(tb_cPost).offset().top - 5}, 0); // Scroll
                 }
                 else if ($("a#previous_page_link").attr("href") !== undefined)
                     window.location = "http://www.tumblr.com" + $("a#previous_page_link").attr("href");
@@ -132,6 +157,32 @@ function tb_keyHandler(e)
         
         case 76:    // l
             tb_post(tb_cPost).find("a[id*=like_button_]").trigger("click");
+            break;
+
+        case 78:    // n
+            tb_post(tb_cPost).find("a[id*=show_notes_]").trigger("click");
+            break;
+
+        case 79:    // o
+            url = tb_post(tb_cPost).find("a[id*=permalink]").attr("href");
+            if (url !== undefined)
+                window.open(url);
+            break;
+
+        case 82:    // r
+            if (!e.shiftKey)
+            {
+                url = tb_post(tb_cPost).find("div.post_controls").find("a[href*=reblog]").attr("href"); 
+                if (!e.metaKey & url !== undefined)
+                {
+                    window.open("http://www.tumblr.com" + url);
+                    e.preventDefault();
+                }
+            }
+            else
+            {
+                tb_post(tb_cPost).find("a[id*=post_control_reply_]").trigger("click");
+            }
             break;
     }
 }
