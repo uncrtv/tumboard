@@ -24,7 +24,8 @@ List of keyboard shortcuts:
     * R: Reply to post (if applicable).
     * n: Show post's notes.
     * e: Expand inline images.
-    * o: Open post's permalink in new window/tab.
+    * o: Display permalink (for copying).
+    * O: Open permalink in a new window/tab.
 
 In addition, you can prepend j and k with a number to go down/up more than 1
 post. (Right now, only positive numbers. __TODO__: Negative numbers?)

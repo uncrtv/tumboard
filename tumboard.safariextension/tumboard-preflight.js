@@ -44,6 +44,12 @@ function tumboard()
             this.post(idx).attr("tb_selected", "true")
                           .css({"-webkit-box-shadow" : "0px 1px 20px #000",
                                 "box-shadow" : "0px 1px 20px #000"});
+        
+        if ($("#tb_urlbox").length === 1)
+        {
+            url = this.currentPost().find("a[id*=permalink]").attr("href");
+            $("#tb_urlbox").find("input").attr({"value" : url});
+        }
     };
 
     /*
@@ -72,7 +78,8 @@ function tumboard()
      * R: Reply to post (if applicable).
      * n: Show post's notes.
      * e: Expand inline images.
-     * o: Open post's permalink in new window/tab.
+     * o: Display permalink (for copying).
+     * O: Open permalink in a new window/tab.
      */
     this.processBuffer = function(e)
     {
@@ -217,6 +224,31 @@ function tumboard()
                 break;
 
             case "o":
+                if ($("#tb_urlbox").length === 1)
+                {
+                    $("#tb_urlbox").stop();
+
+                    if ($("#tb_urlbox").hasClass("hidden"))
+                    {
+                        $("#tb_urlbox").css({"display" : "block"});
+                        $("#tb_urlbox").animate({"opacity" : 1}, 500);
+                        $("#tb_urlbox").toggleClass("hidden");
+                        $("#tb_urlbox").find("input").focus().select();
+                    }
+                    else
+                    {
+                        $("#tb_urlbox").find("input").blur();
+                        $("#tb_urlbox").animate({"opacity" : 0}, 500, function() {
+                            $("#tb_urlbox").css({"display" : "none"});
+                        });
+                        $("#tb_urlbox").toggleClass("hidden");
+                    }
+                }
+
+                this.buffer = "";
+                break;
+
+            case "O":
                 url = this.currentPost().find("a[id*=permalink]").attr("href");
                 if (url !== undefined)
                 {
@@ -280,6 +312,24 @@ function tumboard()
         this.cPostIndex = 0; // current post no
         this.maxPost = $("ol#posts li[id*=post_]").length - 1; // max no of posts
         this.buffer = ""; // command buffer 
+
+        // Add hidden URL box
+        var urlbox = document.createElement("div");
+        urlbox.setAttribute("id", "tb_urlbox");
+        urlbox.setAttribute("class", "hidden");
+
+        var urlbox_text = document.createElement("p");
+        urlbox_text.setAttribute("style", "margin: 10px 20px;");
+        urlbox_text.appendChild(document.createTextNode("Permalink for selected post"));
+        urlbox.appendChild(urlbox_text);
+
+        var urlbox_input = document.createElement("input");
+        urlbox_input.setAttribute("type", "text");
+        urlbox_input.setAttribute("disabled", "disabled");
+        urlbox_input.setAttribute("style", "width: 560px; margin: 0 20px 10px 20px; font-family: 'Georgia', 'Times New Roman', serif; font-size: 1.5em; font-style: italic;");
+        urlbox.appendChild(urlbox_input);
+
+        document.getElementsByTagName("body")[0].appendChild(urlbox);
 
         // Highlight first post
         this.selectPost(this.cPostIndex);
