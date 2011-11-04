@@ -2,6 +2,7 @@
     "name": "tumboard",
     "version": "1.0",
     "description": "Keyboard shortcuts for Tumblr dashboard.",
+    "update_url": "http://myhost.com/mytestextension/updates.xml",
     "permissions": [
       "http://www.tumblr.com/"
     ],
