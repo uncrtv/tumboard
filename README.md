@@ -37,12 +37,8 @@ handle external images? (Send me a pull request if you know!)
 
 To install:
 -----------
-You can go to the __Download__ tab, where there's a packaged v1.0.
-Download a copy and double click to install. Auto-updating is currently
-__not__ available as I don't have a server to host the manifest
-(or even the extension itself) ;~;
-
-Maybe I'll use GitHub Pages.
+* [For Safari](https://github.com/downloads/precocity/tumboard/tumboard.safariextz)
+* [For Chrome](https://github.com/downloads/precocity/tumboard/tumboard.crx)
 
 Who am I?
 ---------
