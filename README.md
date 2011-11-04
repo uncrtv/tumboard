@@ -40,6 +40,9 @@ To install:
 * [For Safari](https://github.com/downloads/precocity/tumboard/tumboard.safariextz)
 * [For Chrome](https://github.com/downloads/precocity/tumboard/tumboard.crx)
 
+Auto-updating is _not_ enabled for now. I need a place to host the manifest.
+(Maybe I'll just host it on this repo.)
+
 Who am I?
 ---------
 My name is Tom, and I'm a fabulous cat. Meow!
