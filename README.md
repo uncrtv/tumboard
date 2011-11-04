@@ -31,6 +31,9 @@ __TODO__: How to navigate to a specific page on the dashboard (so that we can
 input '5D' to go to page 5)? `http://www.tumblr.com/dashboard/5` does not point
 to page 5 _relative to the page you're on_, but relative to the newest post.
 
+__TODO__: `e` currently only expands inline images that aren't external. How to
+handle external images? (Send me a pull request if you know!)
+
 To install:
 -----------
 You can go to the __Download__ tab, where there's a packaged v0.2.
