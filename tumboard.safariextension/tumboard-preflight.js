@@ -230,18 +230,23 @@ function tumboard()
 
                     if ($("#tb_urlbox").hasClass("hidden"))
                     {
-                        $("#tb_urlbox").css({"display" : "block"});
-                        $("#tb_urlbox").animate({"opacity" : 1}, 500);
+                        $("#tb_urlbox").css({"pointer-events" : "", "opacity" : 1});
                         $("#tb_urlbox").toggleClass("hidden");
+                        
+                        $("#tb_veil").css({"pointer-events" : "", "opacity" : 1});
+                        $("#tb_veil").toggleClass("hidden");
+
                         $("#tb_urlbox").find("input").focus().select();
                     }
                     else
                     {
                         $("#tb_urlbox").find("input").blur();
-                        $("#tb_urlbox").animate({"opacity" : 0}, 500, function() {
-                            $("#tb_urlbox").css({"display" : "none"});
-                        });
+
+                        $("#tb_urlbox").css({"pointer-events" : "none", "opacity" : 0});
                         $("#tb_urlbox").toggleClass("hidden");
+
+                        $("#tb_veil").css({"pointer-events" : "none", "opacity" : 0});
+                        $("#tb_veil").toggleClass("hidden");
                     }
                 }
 
@@ -313,10 +318,18 @@ function tumboard()
         this.maxPost = $("ol#posts li[id*=post_]").length - 1; // max no of posts
         this.buffer = ""; // command buffer 
 
+        // Add semi-transparent black background
+        var veil = document.createElement("div");
+        veil.setAttribute("id", "tb_veil");
+        veil.setAttribute("class", "hidden");
+        veil.setAttribute("style", "opacity: 0; pointer-events: none;");
+        document.getElementsByTagName("body")[0].appendChild(veil);
+
         // Add hidden URL box
         var urlbox = document.createElement("div");
         urlbox.setAttribute("id", "tb_urlbox");
         urlbox.setAttribute("class", "hidden");
+        urlbox.setAttribute("style", "opacity: 0; pointer-events: none;");
 
         var urlbox_text = document.createElement("p");
         urlbox_text.setAttribute("style", "margin: 10px 20px;");

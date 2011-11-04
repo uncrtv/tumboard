@@ -44,7 +44,7 @@ Chrome or jQuery's problem.
 
 To install:
 -----------
-You can go to the __Download__ tab, where there's a packaged v0.2.
+You can go to the __Download__ tab, where there's a packaged v0.4.
 Download a copy and double click to install. Auto-updating is currently
 __not__ available as I don't have a server to host the manifest
 (or even the extension itself) ;~;
