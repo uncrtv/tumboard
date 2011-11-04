@@ -1,0 +1,19 @@
+{
+    "name": "tumboard",
+    "version": "1.0",
+    "description": "Keyboard shortcuts for Tumblr dashboard.",
+    "permissions": [
+      "http://www.tumblr.com/"
+    ],
+
+    "content_scripts": [
+        {
+            "matches" : ["http://www.tumblr.com/dashboard*",
+                "http://www.tumblr.com/likes*",
+                "http://www.tumblr.com/tagged*"],
+            "css" : ["tumboard.style.css"],
+            "js" : ["jquery.min.js", "tumboard-preflight.js", "tumboard-postflight.js"],
+            "run_at" : "document_end"
+        }
+    ]
+}
