@@ -5,9 +5,11 @@
  * Tom Cat, 2011.
  ******************************************************************************/
 
-// Global variables
-var tb_cPost = 0; // current post
-var tb_maxPost = $("ol#posts li[id*=post_]").length - 1; // max no of posts
+var tumboard = new function() {
+    this.tb_cPost = 0; // current post no
+    this.tb_maxPost = $("ol#posts li[id*=post_]").length - 1; // max no of posts
+    this.tb_buffer = ""; // command buffer
+}
 
 /*
  * Function: return post DOM object based on index
@@ -192,18 +194,21 @@ function tb_keyHandler(e)
 
 
 /*
- * Special: Initialization
+ * Function: Initialization
  */
-// Highlight first post
-tb_selectPost(tb_cPost);
-
-// Add keydown event handler
-document.addEventListener('keydown', tb_keyHandler, true);
-
-// Add click events for post
-$("ol#posts li[id*=post_]").click(function() {
-    var idx = $("ol#posts li[id*=post_]").index(this);
-    tb_deselectPost(tb_cPost);
-    tb_cPost = idx;
+function tb_setup()
+{
+    // Highlight first post
     tb_selectPost(tb_cPost);
-});
+
+    // Add keydown event handler
+    document.addEventListener('keydown', tb_keyHandler, true);
+
+    // Add click events for post
+    $("ol#posts li[id*=post_]").click(function() {
+        var idx = $("ol#posts li[id*=post_]").index(this);
+        tb_deselectPost(tb_cPost);
+        tb_cPost = idx;
+        tb_selectPost(tb_cPost);
+    });
+}

@@ -25,7 +25,11 @@
 			<key>End</key>
 			<array>
 				<string>jquery.min.js</string>
-				<string>tumboard.js</string>
+				<string>tumboard-postflight.js</string>
+			</array>
+			<key>Start</key>
+			<array>
+				<string>tumboard-preflight.js</string>
 			</array>
 		</dict>
 		<key>Stylesheets</key>
