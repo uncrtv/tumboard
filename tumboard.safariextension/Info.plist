@@ -55,5 +55,7 @@
 			<string>All</string>
 		</dict>
 	</dict>
+	<key>Update Manifest URL</key>
+	<string>https://raw.github.com/precocity/tumboard/master/safari-updatemanifest.plist</string>
 </dict>
 </plist>
