@@ -40,6 +40,11 @@ To install:
 * [For Safari](https://github.com/downloads/precocity/tumboard/tumboard.safariextz)
 * [For Chrome](https://github.com/downloads/precocity/tumboard/tumboard.crx)
 
+Download and double-click.
+
+Auto-updating is _enabled_, triggered by modifying the two update manifests (one
+for each browser).
+
 Who am I?
 ---------
 My name is Tom, and I'm a fabulous cat. Meow!
