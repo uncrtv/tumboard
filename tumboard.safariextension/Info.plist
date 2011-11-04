@@ -24,11 +24,11 @@
 		<dict>
 			<key>End</key>
 			<array>
-				<string>jquery.min.js</string>
 				<string>tumboard-postflight.js</string>
 			</array>
 			<key>Start</key>
 			<array>
+				<string>jquery.min.js</string>
 				<string>tumboard-preflight.js</string>
 			</array>
 		</dict>
