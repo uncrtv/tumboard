@@ -57,8 +57,7 @@ function tumboard()
     };
 
     /*
-     * Function: keydown event handler
-     * Input   : event object
+     * Function: process buffer
      *
      * Key code table
      * --------------
@@ -75,29 +74,133 @@ function tumboard()
      * e: Expand inline images.
      * o: Open post's permalink in new window/tab.
      */
-    this.keyHandler = function(e)
+    this.processBuffer = function(e)
     {
-        console.log(this);
-        console.log(this.cPostIndex);
+        var buffer = this.buffer;
 
-        // Don't mess up text input
-        if (document.activeElement.nodeName == 'TEXTAREA' || document.activeElement.nodeName == 'INPUT')
-            return; 
-
-        // Grab the key code
-        if (!e) var e = window.event;
-        if (e.keyCode) var code = e.keyCode;
-        else if (e.which) var code = e.which;
-
-        switch (code)
+        // Check of there is a number prefixing the keycode
+        var numString = "";
+        var numRegEx = /^\d/;
+        while (buffer.search(numRegEx) !== -1)
         {
-            case 68:    // d
-                if (e.shiftKey) window.location = "http://www.tumblr.com/dashboard";
+            i = buffer.search(numRegEx);
+            numString += buffer[i]; 
+            buffer = buffer.substring(i+1, buffer.length);
+        }
 
+        // Process key command
+        switch (buffer)
+        {
+            case "D":
+                this.buffer = ""; // Clear buffer
+                window.location = "http://www.tumblr.com/dashboard";
+                e.stopPropagation();
+                break;
+
+            case "j":
+                $("html, body").stop();
+
+                if (this.cPostIndex < this.maxPost)
+                {
+                    this.deselectPost(this.cPostIndex);
+                    if (numString !== "")
+                    {
+                        this.cPostIndex += parseInt(numString);
+                        if (this.cPostIndex > this.maxPost) this.cPostIndex = this.maxPost;
+                        this.selectPost(this.cPostIndex);
+                        $("html, body").animate({"scrollTop" : this.currentPost().offset().top - 5}, 500); // Scroll
+                    }
+                    else
+                    {
+                        this.cPostIndex += 1;
+                        this.selectPost(this.cPostIndex);
+                        $("html, body").animate({"scrollTop" : this.currentPost().offset().top - 5}, 0); // Scroll
+                    }
+                }
+                else if ($("a#next_page_link").attr("href") !== undefined)
+                    window.location = "http://www.tumblr.com" + $("a#next_page_link").attr("href");
+
+                this.buffer = "";
+                e.stopPropagation();
+                break;
+
+            case "J":
+                this.deselectPost(this.cPostIndex);
+                this.cPostIndex = this.maxPost;
+                this.selectPost(this.cPostIndex);
+                $("html, body").animate({"scrollTop" : this.currentPost().offset().top - 5}, 500); // scroll
+
+                this.buffer = "";
                 e.stopPropagation();
                 break;
             
-            case 69:    // e
+            case "k":
+                if (this.cPostIndex > 0)
+                {
+                    this.deselectPost(this.cPostIndex);
+                    if (numString !== "")
+                    {
+                        this.cPostIndex -= parseInt(numString);
+                        if (this.cPostIndex < 0) this.cPostIndex = 0;
+                        this.selectPost(this.cPostIndex);
+                        $("html, body").animate({"scrollTop" : this.currentPost().offset().top - 5}, 500); // Scroll
+                    }
+                    else
+                    {
+                        this.cPostIndex -= 1;
+                        this.selectPost(this.cPostIndex);
+                        $("html, body").animate({"scrollTop" : this.currentPost().offset().top - 5}, 0); // Scroll
+                    }
+                }
+                else if ($("a#previous_page_link").attr("href") !== undefined)
+                    window.location = "http://www.tumblr.com" + $("a#previous_page_link").attr("href");
+
+                this.buffer = "";
+                e.stopPropagation();
+                break;
+
+            case "K":
+                this.deselectPost(this.cPostIndex);
+                this.cPostIndex = 0;
+                this.selectPost(this.cPostIndex);
+                $("html, body").animate({"scrollTop" : this.currentPost().offset().top - 5}, 500); // scroll
+
+                this.buffer = "";
+                e.stopPropagation();
+                break;
+                
+            case "i":
+                $("html, body").animate({"scrollTop" : this.currentPost().offset().top - 5}, 500); // Scroll
+                this.buffer = "";
+                break;
+
+            case "l":
+                this.currentPost().find("a[id*=like_button_]").trigger("click");
+                this.buffer = "";
+                break;
+
+            case "r":
+                url = this.currentPost().find("div.post_controls").find("a[href*=reblog]").attr("href"); 
+                if (!e.metaKey & url !== undefined)
+                {
+                    window.open("http://www.tumblr.com" + url);
+                    e.preventDefault();
+                }
+
+                this.buffer = "";
+                break;
+
+            case "R":
+                this.currentPost().find("a[id*=post_control_reply_]").trigger("click");
+                this.buffer = "";
+                break;
+
+            case "n":
+                this.currentPost().find("a[id*=show_notes_]").trigger("click");
+                this.buffer = "";
+                break;
+
+            case "e":
                 var image = this.currentPost().find("img[class*=inline_image]"); 
                 if (image.hasClass("inline_image"))
                 {
@@ -110,99 +213,62 @@ function tumboard()
                     image.removeClass("exp_inline_image");
                 }
 
-                this.currentPost().find("img.inline_external_image").trigger("click");
-
+                this.buffer = "";
                 break;
 
-            case 73:    // i
-                $("html, body").animate({"scrollTop" : this.currentPost().offset().top - 5}, 500); // Scroll
-                break;
-
-            case 74:    // j
-                $("html, body").stop();
-
-                if (e.shiftKey)
-                {
-                    this.deselectPost(this.cPostIndex);
-                    this.cPostIndex = this.maxPost;
-                    this.selectPost(this.cPostIndex);
-                    $("html, body").animate({"scrollTop" : this.currentPost().offset().top - 5}, 500); // scroll
-                }
-                else
-                {
-                    if (this.cPostIndex < this.maxPost)
-                    {
-                        this.deselectPost(this.cPostIndex);
-                        this.cPostIndex += 1;
-                        this.selectPost(this.cPostIndex);
-                        $("html, body").animate({"scrollTop" : this.currentPost().offset().top - 5}, 0); // Scroll
-                    }
-                    else if ($("a#next_page_link").attr("href") !== undefined)
-                        window.location = "http://www.tumblr.com" + $("a#next_page_link").attr("href");
-                }
-
-                e.stopPropagation();
-                break;
-
-            case 75:    // k
-                $("html, body").stop();
-
-                if (e.shiftKey)
-                {
-                    this.deselectPost(this.cPostIndex);
-                    this.cPostIndex = 0;
-                    this.selectPost(this.cPostIndex);
-                    $("html, body").animate({"scrollTop" : this.currentPost().offset().top - 5}, 500); // scroll
-                }
-                else
-                {
-                    if (this.cPostIndex > 0)
-                    {
-                        this.deselectPost(this.cPostIndex);
-                        this.cPostIndex -= 1;
-                        this.selectPost(this.cPostIndex);
-                        $("html, body").animate({"scrollTop" : this.currentPost().offset().top - 5}, 0); // Scroll
-                    }
-                    else if ($("a#previous_page_link").attr("href") !== undefined)
-                        window.location = "http://www.tumblr.com" + $("a#previous_page_link").attr("href");
-                }
-
-                e.stopPropagation();
-                break;
-            
-            case 76:    // l
-                this.currentPost().find("a[id*=like_button_]").trigger("click");
-                break;
-
-            case 78:    // n
-                this.currentPost().find("a[id*=show_notes_]").trigger("click");
-                break;
-
-            case 79:    // o
+            case "o":
                 url = this.currentPost().find("a[id*=permalink]").attr("href");
                 if (url !== undefined)
                 {
                     window.open(url);
                     e.preventDefault();
                 }
+
+                this.buffer = "";
                 break;
 
-            case 82:    // r
-                if (!e.shiftKey)
-                {
-                    url = this.currentPost().find("div.post_controls").find("a[href*=reblog]").attr("href"); 
-                    if (!e.metaKey & url !== undefined)
-                    {
-                        window.open("http://www.tumblr.com" + url);
-                        e.preventDefault();
-                    }
-                }
-                else
-                {
-                    this.currentPost().find("a[id*=post_control_reply_]").trigger("click");
-                }
+            default:
+                if (numString === "") this.buffer = "";
                 break;
         }
+    }
+
+    /*
+     * Function: keydown event handler
+     * Input   : event object
+     */
+    this.keyHandler = function(e)
+    {
+        // Don't mess up text input
+        if (document.activeElement.nodeName == 'TEXTAREA' || document.activeElement.nodeName == 'INPUT')
+            return; 
+
+        // Grab the key code
+        if (!e) var e = window.event;
+        if (e.keyCode) var code = e.keyCode;
+        else if (e.which) var code = e.which;
+
+        // If code = 27 ie. <ESC> then clear buffer
+        // then immediately return
+        if (code == 27)
+        {
+            this.buffer = "";
+            return;
+        }
+
+        // If code = 16, 17, 18, 91 or 93 (modifier keys)
+        // then return
+        if ((code == 16) || (code == 17) || (code == 18) || (code == 91) || (code == 93))
+            return;
+        
+        // Update the buffer, then process it
+        if (e.shiftKey)
+            var c = String.fromCharCode(code).toUpperCase();
+        else
+            var c = String.fromCharCode(code).toLowerCase();
+
+        this.buffer += c;
+        this.processBuffer(e);
     };
 
     /*
