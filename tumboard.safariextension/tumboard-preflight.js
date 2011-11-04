@@ -182,7 +182,21 @@ function tumboard()
                 break;
 
             case "l":
-                this.currentPost().find("a[id*=like_button_]").trigger("click");
+                //this.currentPost().find("a[id*=like_button_]").trigger("click");
+                var ev;
+                if (document.createEvent)
+                {
+                    ev = document.createEvent("HTMLEvents");
+                    ev.initEvent("click", true, true);
+                    this.currentPost().find("a[id*=like_button_]")[0].dispatchEvent(ev);
+                }
+                else
+                {
+                    ev = document.createEventObject();
+                    ev.eventType = "onclick";
+                    this.currentPost().find("a[id*=like_button_]")[0].fireEvent(ev.eventType, ev);
+                }
+
                 this.buffer = "";
                 break;
 
@@ -198,12 +212,40 @@ function tumboard()
                 break;
 
             case "R":
-                this.currentPost().find("a[id*=post_control_reply_]").trigger("click");
+                //this.currentPost().find("a[id*=post_control_reply_]").trigger("click");
+                var ev;
+                if (document.createEvent)
+                {
+                    ev = document.createEvent("HTMLEvents");
+                    ev.initEvent("click", true, true);
+                    this.currentPost().find("a[id*=post_control_reply_]")[0].dispatchEvent(ev);
+                }
+                else
+                {
+                    ev = document.createEventObject();
+                    ev.eventType = "onclick";
+                    this.currentPost().find("a[id*=post_control_reply_]")[0].fireEvent(ev.eventType, ev);
+                }
+
                 this.buffer = "";
                 break;
 
             case "n":
-                this.currentPost().find("a[id*=show_notes_]").trigger("click");
+                //this.currentPost().find("a[id*=show_notes_]").trigger("click");
+                var ev;
+                if (document.createEvent)
+                {
+                    ev = document.createEvent("HTMLEvents");
+                    ev.initEvent("click", true, true);
+                    this.currentPost().find("a[id*=show_notes_]")[0].dispatchEvent(ev);
+                }
+                else
+                {
+                    ev = document.createEventObject();
+                    ev.eventType = "onclick";
+                    this.currentPost().find("a[id*=show_notes_]")[0].fireEvent(ev.eventType, ev);
+                }
+
                 this.buffer = "";
                 break;
 

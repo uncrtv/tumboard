@@ -5,10 +5,8 @@ Created this because I find Tumblr's j and k wholly insufficient. And because I
 
 List of supported browsers:
 ---------------------------
- * Safari (tested on 5.1.1 in Lion). I can't test on older versions of Safari
-because I don't have a spare Mac (or PC for that matter).
- * Partial support for Chrome: _Some shortcuts aren't working_. Read below for
-details.
+ * Safari (tested on 5.1.1 in Lion).
+ * Google Chrome (tested on Chrome 15.0.874.106 in Lion).
 
 List of keyboard shortcuts:
 ---------------------------
@@ -37,14 +35,9 @@ to page 5 relative to the page you're on, but relative to the _newest post_.
 __TODO__: `e` currently only expands inline images that aren't external. How to
 handle external images? (Send me a pull request if you know!)
 
-__TODO__: On Chrome, several keyboard shortcuts are broken, such as `l` and `R`.
-Basically, everything involving `$.trigger("click")` (a jQuery function) is not
-working at all. The code works fine on Safari though, so I think it's either
-Chrome or jQuery's problem.
-
 To install:
 -----------
-You can go to the __Download__ tab, where there's a packaged v0.4.
+You can go to the __Download__ tab, where there's a packaged v1.0.
 Download a copy and double click to install. Auto-updating is currently
 __not__ available as I don't have a server to host the manifest
 (or even the extension itself) ;~;
