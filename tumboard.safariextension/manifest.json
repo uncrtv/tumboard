@@ -1,6 +1,6 @@
 {
     "name": "tumboard",
-    "version": "1.0",
+    "version": "0.3",
     "description": "Keyboard shortcuts for Tumblr dashboard.",
     "permissions": [
       "http://www.tumblr.com/"
