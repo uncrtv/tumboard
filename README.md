@@ -1,14 +1,12 @@
 tumboard: Keyboard shortcuts for Tumblr dashboard
 =================================================
-Created this because I find Tumblr's j and k wholly insufficient.
-And because I 'like' a lot of post, and can't be bothered to reach
-my mouse.
+Created this because I find Tumblr's j and k wholly insufficient. And because I
+'like' a lot of post, and can't be bothered to reach my mouse.
 
 List of supported browsers:
 ---------------------------
- * Safari only, for now. Tested on Safari 5.1.1 (Lion). I can't
-test on older versions of Safari because I don't have a spare
-Mac (or PC for that matter).
+ * Safari only, for now. Tested on Safari 5.1.1 (Lion). I can't test on older
+versions of Safari because I don't have a spare Mac (or PC for that matter).
  * I intend to extend this to Chrome in the very near future.
 
 List of keyboard shortcuts:
@@ -25,6 +23,13 @@ List of keyboard shortcuts:
  * n: Show post's notes.
  * e: Expand inline images.
  * o: Open post's permalink in new window/tab.
+
+In addition, you can prepend j and k with a number to go down/up more than 1
+post.
+
+__TODO__: How to navigate to a specific page on the dashboard (so that we can
+input '5D' to go to page 5)? `http://www.tumblr.com/dashboard/5` does not point
+to page 5 _relative to the page you're on_, but relative to the newest post.
 
 To install:
 -----------
