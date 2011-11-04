@@ -9,3 +9,8 @@ Current keyboard shortcuts:
  * K: Scroll to first post in a page.
  * i: Scroll to post currently selected.
  * l: "Like"/heart a post.
+ * r: Reblog a post.
+ * R: Reply to post (if applicable).
+ * n: Show post's notes.
+ * e: Expand inline images.
+ * o: Open post's permalink in new window/tab.
