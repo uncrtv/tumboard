@@ -67,6 +67,7 @@ function tumboard()
      *
      * Key code table
      * --------------
+     * h: Display help box (which lists these keyboard shortcuts).
      * D: Go back to page 1 of dashboard. 
      * j: Scroll down a post.
      * J: Scroll to last post in page.
@@ -98,10 +99,31 @@ function tumboard()
         // Process key command
         switch (buffer)
         {
+            case "h":
+                if ($("#tb_help").length === 1)
+                {
+                    $("#tb_help").stop();
+
+                    if ($("#tb_help").hasClass("hidden"))
+                    {
+                        $("#tb_help").css({"pointer-events" : "", "opacity" : 1});
+                        $("#tb_help").toggleClass("hidden");
+                    }
+                    else
+                    {
+                        $("#tb_help").find("input").blur();
+                        $("#tb_help").css({"pointer-events" : "none", "opacity" : 0});
+                        $("#tb_help").toggleClass("hidden");
+                    }
+                }
+
+                this.buffer = "";
+                break;
+
             case "D":
-                this.buffer = ""; // Clear buffer
                 window.location = "http://www.tumblr.com/dashboard";
                 e.stopPropagation();
+                this.buffer = "";
                 break;
 
             case "j":
@@ -385,6 +407,32 @@ function tumboard()
         urlbox.appendChild(urlbox_input);
 
         document.getElementsByTagName("body")[0].appendChild(urlbox);
+
+        // Add help box
+        var helpbox = document.createElement("div");
+        helpbox.setAttribute("id", "tb_help");
+        helpbox.setAttribute("class", "hidden");
+        helpbox.setAttribute("style", "opacity: 0; pointer-events: none;");
+
+        // Help text
+        helpbox.appendChild($("<p style='text-align: center; font-weight: bold;'>tumboard shortcuts</p>")[0]);
+        helpbox.appendChild($("<p style='margin: 0 20px'><span style='color: #32B44B'>h</span>: Display this help box.</p>")[0]);
+        helpbox.appendChild($("<p style='margin: 0 20px'><span style='color: #32B44B'>D</span>: Go back to page 1 of dashboard.</p>")[0]);
+        helpbox.appendChild($("<p style='margin: 0 20px'><span style='color: #32B44B'>j</span>: Scroll down a post.</p>")[0]);
+        helpbox.appendChild($("<p style='margin: 0 20px'><span style='color: #32B44B'>J</span>: Scroll to last post in page.</p>")[0]);
+        helpbox.appendChild($("<p style='margin: 0 20px'><span style='color: #32B44B'>k</span>: Scroll up a post.</p>")[0]);
+        helpbox.appendChild($("<p style='margin: 0 20px'><span style='color: #32B44B'>K</span>: Scroll to first post in a page.</p>")[0]);
+        helpbox.appendChild($("<p style='margin: 0 20px'><span style='color: #32B44B'>i</span>: Scroll to post currently selected.</p>")[0]);
+        helpbox.appendChild($("<p style='margin: 0 20px'><span style='color: #32B44B'>l</span>: Like/heart a post.</p>")[0]);
+        helpbox.appendChild($("<p style='margin: 0 20px'><span style='color: #32B44B'>r</span>: Reblog a post.</p>")[0]);
+        helpbox.appendChild($("<p style='margin: 0 20px'><span style='color: #32B44B'>R</span>: Reply to post (if applicable).</p>")[0]);
+        helpbox.appendChild($("<p style='margin: 0 20px'><span style='color: #32B44B'>n</span>: Show post's notes.</p>")[0]);
+        helpbox.appendChild($("<p style='margin: 0 20px'><span style='color: #32B44B'>e</span>: Expand inline images.</p>")[0]);
+        helpbox.appendChild($("<p style='margin: 0 20px'><span style='color: #32B44B'>o</span>: Display permalink (for copying).</p>")[0]);
+        helpbox.appendChild($("<p style='margin: 0 20px'><span style='color: #32B44B'>O</span>: Open permalink in a new window/tab.</p>")[0]);
+        helpbox.appendChild($("<p style='margin: 10px 20px'>In addition, you can prepend a number to j and k to scroll down/up more than 1 post.</p>")[0]);
+
+        document.getElementsByTagName("body")[0].appendChild(helpbox);
 
         // Highlight first post
         this.selectPost(this.cPostIndex);

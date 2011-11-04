@@ -42,6 +42,33 @@ ol#posts .post
     z-index: 100;
 }
 
+#tb_help
+{
+    position: fixed;
+    top: 20px;
+    left: 20px;
+
+    width: 280px;
+    height: 430px;
+
+    background: #000;
+
+    -webkit-border-radius: 10px;
+    border-radius:         10px;
+
+    -webkit-box-shadow: 0px 0px 10px #fff;
+    box-shadow:         0px 0px 10px #fff;
+
+    -webkit-transition: opacity 0.2s linear;
+    transition:         opacity 0.2s linear;
+
+    font-family: "Georgia", "Times New Roman", serif;
+    font-size: 1em;
+    color: #fff;
+
+    z-index: 200;
+}
+
 #tb_veil
 {
     position: fixed;
