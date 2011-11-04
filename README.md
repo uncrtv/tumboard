@@ -12,18 +12,19 @@ details.
 
 List of keyboard shortcuts:
 ---------------------------
- * D: Go back to page 1 of dashboard. 
- * j: Scroll down a post.
- * J: Scroll to last post in page.
- * k: Scroll up a post.
- * K: Scroll to first post in a page.
- * i: Scroll to post currently selected.
- * l: "Like"/heart a post.
- * r: Reblog a post.
- * R: Reply to post (if applicable).
- * n: Show post's notes.
- * e: Expand inline images.
- * o: Open post's permalink in new window/tab.
+
+    * D: Go back to page 1 of dashboard. 
+    * j: Scroll down a post.
+    * J: Scroll to last post in page.
+    * k: Scroll up a post.
+    * K: Scroll to first post in a page.
+    * i: Scroll to post currently selected.
+    * l: "Like"/heart a post.
+    * r: Reblog a post.
+    * R: Reply to post (if applicable).
+    * n: Show post's notes.
+    * e: Expand inline images.
+    * o: Open post's permalink in new window/tab.
 
 In addition, you can prepend j and k with a number to go down/up more than 1
 post.
@@ -35,7 +36,7 @@ to page 5 _relative to the page you're on_, but relative to the newest post.
 __TODO__: `e` currently only expands inline images that aren't external. How to
 handle external images? (Send me a pull request if you know!)
 
-__TODO__: On Chrome, several keyboard shortcuts are broken, such as l and R.
+__TODO__: On Chrome, several keyboard shortcuts are broken, such as `l` and `R`.
 Basically, everything involving `$.trigger("click")` (a jQuery function) is not
 working at all. The code works fine on Safari though, so I think it's either
 Chrome or jQuery's problem.
