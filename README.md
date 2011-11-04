@@ -11,6 +11,7 @@ List of supported browsers:
 List of keyboard shortcuts:
 ---------------------------
 
+    * h: Display help box (which lists available keyboard shortcuts).
     * D: Go back to page 1 of dashboard. 
     * j: Scroll down a post.
     * J: Scroll to last post in page.
