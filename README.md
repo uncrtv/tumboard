@@ -1,7 +1,7 @@
 tumboard: Keyboard shortcuts for Tumblr dashboard
 =================================================
 Created this because I find Tumblr's j and k wholly insufficient. And because I
-'like' a lot of post, and can't be bothered to reach my mouse.
+'like' a lot of posts, and can't be bothered to reach my mouse.
 
 List of supported browsers:
 ---------------------------
