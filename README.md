@@ -48,6 +48,12 @@ List of supported browsers:
  * Safari (tested on 5.1.1 in Lion).
  * Google Chrome (tested on Chrome 15.0.874.106 in Lion).
 
+License
+-------
+tumboard is released under the BSD license, available [here][li].
+
+[li]: https://raw.github.com/precocity/tumboard/master/LICENSE
+
 Who am I?
 ---------
 My name is Tom, and I'm a fabulous cat. Meow!
