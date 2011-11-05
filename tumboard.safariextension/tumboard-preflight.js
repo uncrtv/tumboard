@@ -39,8 +39,8 @@ function tumboard()
     this.selectPost = function(idx, time)
     {
         this.post(idx).attr("tb_selected", "true")
-                      .css({"-webkit-box-shadow" : "0px 1px 20px 3px #fff",
-                            "box-shadow" : "0px 1px 20px 3px #fff"});
+                      .css({"-webkit-box-shadow" : "0px 1px 15px 3px #fff",
+                            "box-shadow" : "0px 1px 15px 3px #fff"});
         
         if ($("#tb_urlbox").length === 1)
         {
@@ -70,13 +70,13 @@ function tumboard()
 
             if ($("#tb_help").hasClass("hidden"))
             {
-                $("#tb_help").css({"pointer-events" : "", "opacity" : 1});
+                $("#tb_help").css({"pointer-events" : "", "left" : 0});
                 $("#tb_help").toggleClass("hidden");
             }
             else
             {
                 $("#tb_help").find("input").blur();
-                $("#tb_help").css({"pointer-events" : "none", "opacity" : 0});
+                $("#tb_help").css({"pointer-events" : "none", "left" : "-320px"});
                 $("#tb_help").toggleClass("hidden");
             }
         }
@@ -84,23 +84,6 @@ function tumboard()
 
     /*
      * Function: process buffer
-     *
-     * Key code table
-     * --------------
-     * h: Display help box (which lists these keyboard shortcuts).
-     * D: Go back to page 1 of dashboard. 
-     * j: Scroll down a post.
-     * J: Scroll to last post in page.
-     * k: Scroll up a post.
-     * K: Scroll to first post in a page.
-     * i: Scroll to post currently selected.
-     * l: "Like"/heart a post.
-     * r: Reblog a post.
-     * R: Reply to post (if applicable).
-     * n: Show post's notes.
-     * e: Expand inline images.
-     * o: Display permalink (for copying).
-     * O: Open permalink in a new window/tab.
      */
     this.processBuffer = function(e)
     {
@@ -132,26 +115,28 @@ function tumboard()
                 break;
 
             case "j":
-                $("html, body").stop();
+                var maxPost = $("ol#posts li[id*=post_]").length - 1;
 
-                if (this.cPostIndex < this.maxPost)
+                if (this.cPostIndex < maxPost)
                 {
                     this.deselectPost(this.cPostIndex);
                     if (numString !== "")
                     {
                         this.cPostIndex += parseInt(numString);
-                        if (this.cPostIndex > this.maxPost) this.cPostIndex = this.maxPost;
+                        if (this.cPostIndex > maxPost) this.cPostIndex = maxPost;
                         this.selectPost(this.cPostIndex);
+                        $("html, body").stop();
                         $("html, body").animate({"scrollTop" : this.currentPost().offset().top - 5}, 500); // Scroll
                     }
                     else
                     {
                         this.cPostIndex += 1;
                         this.selectPost(this.cPostIndex);
+                        $("html, body").stop();
                         $("html, body").animate({"scrollTop" : this.currentPost().offset().top - 5}, 0); // Scroll
                     }
                 }
-                else if ($("a#next_page_link").attr("href") !== undefined)
+                else if (($("a#next_page_link").attr("href") !== undefined) & ($("#auto_pagination_loader").length === 0))
                     window.location = "http://www.tumblr.com" + $("a#next_page_link").attr("href");
 
                 this.buffer = "";
@@ -163,7 +148,14 @@ function tumboard()
                 //this.cPostIndex = this.maxPost;
                 //this.selectPost(this.cPostIndex);
                 //$("html, body").animate({"scrollTop" : this.currentPost().offset().top - 5}, 500); // scroll
-                if (numString !== "")
+                if (numString === "0")
+                {
+                    this.deselectPost(this.cPostIndex);
+                    this.cPostIndex = $("ol#posts li[id*=post_]").length - 1;
+                    this.selectPost(this.cPostIndex);
+                    $("body").animate({"scrollTop" : this.currentPost().offset().top - 5}, 500);
+                }
+                else if (numString !== "")
                     $("body").animate({"scrollTop" : $("body").scrollTop() + parseInt(numString)*100}, 0);
                 else
                     $("body").animate({"scrollTop" : $("body").scrollTop() + 100}, 0);
@@ -181,12 +173,14 @@ function tumboard()
                         this.cPostIndex -= parseInt(numString);
                         if (this.cPostIndex < 0) this.cPostIndex = 0;
                         this.selectPost(this.cPostIndex);
+                        $("html, body").stop();
                         $("html, body").animate({"scrollTop" : this.currentPost().offset().top - 5}, 500); // Scroll
                     }
                     else
                     {
                         this.cPostIndex -= 1;
                         this.selectPost(this.cPostIndex);
+                        $("html, body").stop();
                         $("html, body").animate({"scrollTop" : this.currentPost().offset().top - 5}, 0); // Scroll
                     }
                 }
@@ -202,7 +196,14 @@ function tumboard()
                 //this.cPostIndex = 0;
                 //this.selectPost(this.cPostIndex);
                 //$("html, body").animate({"scrollTop" : this.currentPost().offset().top - 5}, 500); // scroll
-                if (numString !== "")
+                if (numString === "0")
+                {
+                    this.deselectPost(this.cPostIndex);
+                    this.cPostIndex = 0;
+                    this.selectPost(this.cPostIndex);
+                    $("body").animate({"scrollTop" : 0}, 500);
+                }
+                else if (numString !== "")
                     $("body").animate({"scrollTop" : $("body").scrollTop() - parseInt(numString)*100}, 0);
                 else
                     $("body").animate({"scrollTop" : $("body").scrollTop() - 100}, 0);
@@ -392,7 +393,6 @@ function tumboard()
     {
         // Initialize global variables
         this.cPostIndex = 0; // current post no
-        this.maxPost = $("ol#posts li[id*=post_]").length - 1; // max no of posts
         this.buffer = ""; // command buffer 
 
         // Add semi-transparent black background
@@ -409,26 +409,25 @@ function tumboard()
         $("body").append(urlbox);
 
         // Add help box
-        var helpbox_html = "<div id='tb_help' class='hidden' style='opacity: 0; pointer-events: none;'></div>";
+        var helpbox_html = "<div id='tb_help' class='hidden' style='left: -320px'></div>";
         var helpbox = $(helpbox_html);
 
         // Help text
         helpbox.append($("<p class='help_title'>tumboard shortcuts</p>"));
-        helpbox.append($("<p class='help_item'><span>h</span>: Display this help box.</p>"));
-        helpbox.append($("<p class='help_item'><span>D</span>: Go back to page 1 of dashboard.</p>"));
-        helpbox.append($("<p class='help_item'><span>j</span>: Scroll down a post.</p>"));
-        helpbox.append($("<p class='help_item'><span>J</span>: Scroll to last post in page.</p>"));
-        helpbox.append($("<p class='help_item'><span>k</span>: Scroll up a post.</p>"));
-        helpbox.append($("<p class='help_item'><span>K</span>: Scroll to first post in a page.</p>"));
-        helpbox.append($("<p class='help_item'><span>i</span>: Scroll to post currently selected.</p>"));
-        helpbox.append($("<p class='help_item'><span>l</span>: Like/heart a post.</p>"));
-        helpbox.append($("<p class='help_item'><span>r</span>: Reblog a post.</p>"));
-        helpbox.append($("<p class='help_item'><span>R</span>: Reply to post (if applicable).</p>"));
-        helpbox.append($("<p class='help_item'><span>n</span>: Show post's notes.</p>"));
-        helpbox.append($("<p class='help_item'><span>e</span>: Expand inline images.</p>"));
-        helpbox.append($("<p class='help_item'><span>o</span>: Display permalink (for copying).</p>"));
-        helpbox.append($("<p class='help_item'><span>O</span>: Open permalink in a new window/tab.</p>"));
-        helpbox.append($("<p class='help_item'>In addition, you can prepend a number to j and k to scroll down/up more than 1 post.</p>"));
+        helpbox.append($("<p class='help_item'><span>h</span>Display this help box.</p>"));
+        helpbox.append($("<p class='help_item'><span>D</span>Go back to page 1 of dashboard.</p>"));
+        helpbox.append($("<p class='help_item'><span>j</span>Scroll down a post. <i>Prepend with a number to scroll down more than 1 post.</i></p>"));
+        helpbox.append($("<p class='help_item'><span>J</span>Scroll down 100 units. <i>Prepend with a number to scroll down a multiple of 100 units, or prepend with zero (0) to scroll to bottom (and select bottom-most post).</i></p>"));
+        helpbox.append($("<p class='help_item'><span>k</span>Scroll up a post. <i>Prepend with a number to scroll up more than 1 post.</i></p>"));
+        helpbox.append($("<p class='help_item'><span>K</span>Scroll up 100 units. <i>Prepend with a number to scroll up a multiple of 100 units, or prepend with zero (0) to scroll to top (and select top-most post).</i></p>"));
+        helpbox.append($("<p class='help_item'><span>i</span>Scroll to post currently selected.</p>"));
+        helpbox.append($("<p class='help_item'><span>l</span>Like/heart a post.</p>"));
+        helpbox.append($("<p class='help_item'><span>r</span>Reblog a post.</p>"));
+        helpbox.append($("<p class='help_item'><span>R</span>Reply to post (if applicable).</p>"));
+        helpbox.append($("<p class='help_item'><span>n</span>Show post's notes.</p>"));
+        helpbox.append($("<p class='help_item'><span>e</span>Expand inline images.</p>"));
+        helpbox.append($("<p class='help_item'><span>o</span>Display permalink (for copying).</p>"));
+        helpbox.append($("<p class='help_item'><span>O</span>Open permalink in a new window/tab.</p>"));
 
         $("body").append(helpbox);
 
@@ -437,7 +436,7 @@ function tumboard()
         tabbutton_html += "<a title='tumboard help'>tumboard help</a>";
         tabbutton_html += "</div>";
         var tabbutton = $(tabbutton_html);
-        $("#logout_button").before(tabbutton);
+        $("#logout_button").after(tabbutton);
 
         // Highlight first post
         this.selectPost(this.cPostIndex);

@@ -79,34 +79,37 @@ ol#posts .post
 #tb_help
 {
     position: fixed;
-    top: 20px;
-    left: 20px;
+    top: 50%;
+    margin-top: -270px;
 
-    width: 280px;
-    height: 430px;
+    width: 300px;
+    height: 540px;
 
-    background: #000;
+    background: #fff;
 
-    -webkit-border-radius: 10px;
-    border-radius:         10px;
+    border-top: 5px solid #AAA;
+    border-right: 5px solid #AAA;
+    border-bottom: 5px solid #AAA;
 
-    -webkit-box-shadow: 0px 0px 10px #fff;
-    box-shadow:         0px 0px 10px #fff;
+    -webkit-transition: left 0.5s ease-out;
+    transition:         left 0.5s ease-out;
 
-    -webkit-transition: opacity 0.2s linear;
-    transition:         opacity 0.2s linear;
+    -webkit-box-shadow: 0 0 10px #000;
+    box-shadow:         0 0 10px #000;
 
     font-family: "Georgia", "Times New Roman", serif;
     font-size: 1em;
-    color: #fff;
+    color: #000;
+
+    opacity: 0.9;
 
     z-index: 200;
 }
 
 #tb_help p.help_title
 {
-    text-align: center !important;
-    font-weight: bold !important;
+    font-style: italic;
+    font-size: 2em;
 }
 
 #tb_help p.help_item
@@ -114,14 +117,11 @@ ol#posts .post
     margin: 0 20px !important;
 }
 
-#tb_help p.help_item:last-child
-{
-    margin: 10px 20px !important;
-}
-
 #tb_help p.help_item span
 {
-    color: #32B44B !important;
+    color: #226126 !important;
+    font-family: "Courier New", fixed;
+    margin-right: 10px !important;
 }
 
 /*** Tab bar button ***/
