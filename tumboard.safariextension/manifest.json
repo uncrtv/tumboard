@@ -11,6 +11,7 @@
     "permissions": [
       "http://www.tumblr.com/"
     ],
+    "update_url" : "https://raw.github.com/precocity/tumboard/master/chrome-updatemanifest.xml",
 
     "content_scripts": [
         {
