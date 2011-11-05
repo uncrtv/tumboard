@@ -42,7 +42,7 @@ To install:
 
 [sdl]: https://github.com/downloads/precocity/tumboard/tumboard.safariextz
     "Direct download link for Safari extension"
-[cdl]: https://github.com/downloads/precocity/tumboard/tumboard.crx
+[cdl]: https://github.com/downloads/precocity/tumboard/tumboard.safariextension.crx
     "Direct download link for Chrome extension"
 
 Download and double-click.
