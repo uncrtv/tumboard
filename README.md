@@ -1,7 +1,8 @@
 tumboard: Keyboard shortcuts for Tumblr dashboard
 =================================================
-Created this because I find Tumblr's j and k wholly insufficient. And because I
-'like' a lot of posts, and can't be bothered to reach my mouse.
+Tumblr dashboard already has several shortcuts, namely j and k. Those two alone,
+however, are wholly insufficient, so I created this simple extension to add
+a heap of convenient keyboard shortcuts for Tumblr.
 
 To install:
 -----------
