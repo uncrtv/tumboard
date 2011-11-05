@@ -36,16 +36,11 @@ function tumboard()
      * Function: select post
      * Input   : index of post (-1 counts from bottom)
      */
-    this.selectPost = function(idx)
+    this.selectPost = function(idx, time)
     {
-        if ((idx !== 0) & (idx !== this.maxPost))
-            this.post(idx).attr("tb_selected", "true")
-                          .css({"-webkit-box-shadow" : "0px 1px 20px #fff",
-                                "box-shadow" : "0px 1px 20px #fff"});
-        else
-            this.post(idx).attr("tb_selected", "true")
-                          .css({"-webkit-box-shadow" : "0px 1px 20px #000",
-                                "box-shadow" : "0px 1px 20px #000"});
+        this.post(idx).attr("tb_selected", "true")
+                      .css({"-webkit-box-shadow" : "0px 1px 20px #fff",
+                            "box-shadow" : "0px 1px 20px #fff"});
         
         if ($("#tb_urlbox").length === 1)
         {
@@ -164,10 +159,14 @@ function tumboard()
                 break;
 
             case "J":
-                this.deselectPost(this.cPostIndex);
-                this.cPostIndex = this.maxPost;
-                this.selectPost(this.cPostIndex);
-                $("html, body").animate({"scrollTop" : this.currentPost().offset().top - 5}, 500); // scroll
+                //this.deselectPost(this.cPostIndex);
+                //this.cPostIndex = this.maxPost;
+                //this.selectPost(this.cPostIndex);
+                //$("html, body").animate({"scrollTop" : this.currentPost().offset().top - 5}, 500); // scroll
+                if (numString !== "")
+                    $("body").animate({"scrollTop" : $("body").scrollTop() + parseInt(numString)*100}, 0);
+                else
+                    $("body").animate({"scrollTop" : $("body").scrollTop() + 100}, 0);
 
                 this.buffer = "";
                 e.stopPropagation();
@@ -199,10 +198,14 @@ function tumboard()
                 break;
 
             case "K":
-                this.deselectPost(this.cPostIndex);
-                this.cPostIndex = 0;
-                this.selectPost(this.cPostIndex);
-                $("html, body").animate({"scrollTop" : this.currentPost().offset().top - 5}, 500); // scroll
+                //this.deselectPost(this.cPostIndex);
+                //this.cPostIndex = 0;
+                //this.selectPost(this.cPostIndex);
+                //$("html, body").animate({"scrollTop" : this.currentPost().offset().top - 5}, 500); // scroll
+                if (numString !== "")
+                    $("body").animate({"scrollTop" : $("body").scrollTop() - parseInt(numString)*100}, 0);
+                else
+                    $("body").animate({"scrollTop" : $("body").scrollTop() - 100}, 0);
 
                 this.buffer = "";
                 e.stopPropagation();

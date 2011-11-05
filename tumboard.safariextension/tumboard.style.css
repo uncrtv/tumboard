@@ -7,13 +7,14 @@
  * Licensed under the BSD license, available here: http://bit.ly/vSZSvM
  ******************************************************************************/
 
-ol#posts .post
+ol#posts .post_content
 {
     /* CSS3 animation */
     -webkit-transition: -webkit-box-shadow 0.5s linear;
     transition:         box-shadow         0.5s linear;
 }
 
+/*** URL box ***/
 #tb_urlbox
 {
     position: fixed;
@@ -58,6 +59,23 @@ ol#posts .post
     font-style: italic !important;
 }
 
+#tb_veil
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+/*    -webkit-transition: opacity 0.2s linear;
+    transition:         opacity 0.2s linear;*/
+
+    background: rgba(0,0,0,0.5); 
+
+    z-index: 99;
+}
+
+/*** Help box ***/
 #tb_help
 {
     position: fixed;
@@ -106,6 +124,7 @@ ol#posts .post
     color: #32B44B !important;
 }
 
+/*** Tab bar button ***/
 #tb_button
 {
     width: 30px;
@@ -126,18 +145,3 @@ ol#posts .post
     opacity: 1;
 }
 
-#tb_veil
-{
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-
-/*    -webkit-transition: opacity 0.2s linear;
-    transition:         opacity 0.2s linear;*/
-
-    background: rgba(0,0,0,0.5); 
-
-    z-index: 99;
-}
