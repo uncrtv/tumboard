@@ -38,16 +38,14 @@ handle external images? (Send me a pull request if you know!)
 
 To install:
 -----------
-* [For Safari][sdl] (Direct URL)
-* [For Chrome][cdl] (Chrome Web Store)
+[For Safari][sdl] and [For Chrome][cdl].
 
 [sdl]: https://github.com/downloads/precocity/tumboard/tumboard.safariextz
     "Direct download link for Safari extension"
+[cdl]: https://github.com/downloads/precocity/tumboard/tumboard.crx
+    "Direct download link for Chrome extension"
 
 Download and double-click.
-
-Auto-updating is _enabled_, triggered by modifying the two update manifests (one
-for each browser).
 
 Who am I?
 ---------

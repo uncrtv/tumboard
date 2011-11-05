@@ -8,10 +8,8 @@
             "48" : "Icon-48.png",
            "128" : "Icon.png"
         },
-    "permissions": [
-      "http://www.tumblr.com/"
-    ],
-    "update_url" : "https://raw.github.com/precocity/tumboard/master/chrome-updatemanifest.xml",
+    "permissions": ["http://www.tumblr.com/"],
+    "update_url": "https://raw.github.com/precocity/tumboard/master/chrome-updatemanifest.xml",
 
     "content_scripts": [
         {
