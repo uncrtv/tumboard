@@ -3,10 +3,16 @@ tumboard: Keyboard shortcuts for Tumblr dashboard
 Created this because I find Tumblr's j and k wholly insufficient. And because I
 'like' a lot of posts, and can't be bothered to reach my mouse.
 
-List of supported browsers:
----------------------------
- * Safari (tested on 5.1.1 in Lion).
- * Google Chrome (tested on Chrome 15.0.874.106 in Lion).
+To install:
+-----------
+[For Safari][sdl] and [For Chrome][cdl].
+
+[sdl]: https://github.com/downloads/precocity/tumboard/tumboard.safariextz
+    "Direct download link for Safari extension"
+[cdl]: https://github.com/downloads/precocity/tumboard/tumboard.safariextension.crx
+    "Direct download link for Chrome extension"
+
+Download and double-click!
 
 List of keyboard shortcuts:
 ---------------------------
@@ -36,16 +42,10 @@ to page 5 relative to the page you're on, but relative to the _newest post_.
 __TODO__: `e` currently only expands inline images that aren't external. How to
 handle external images? (Send me a pull request if you know!)
 
-To install:
------------
-[For Safari][sdl] and [For Chrome][cdl].
-
-[sdl]: https://github.com/downloads/precocity/tumboard/tumboard.safariextz
-    "Direct download link for Safari extension"
-[cdl]: https://github.com/downloads/precocity/tumboard/tumboard.safariextension.crx
-    "Direct download link for Chrome extension"
-
-Download and double-click.
+List of supported browsers:
+---------------------------
+ * Safari (tested on 5.1.1 in Lion).
+ * Google Chrome (tested on Chrome 15.0.874.106 in Lion).
 
 Who am I?
 ---------
