@@ -39,8 +39,8 @@ function tumboard()
     this.selectPost = function(idx, time)
     {
         this.post(idx).attr("tb_selected", "true")
-                      .css({"-webkit-box-shadow" : "0px 1px 20px #fff",
-                            "box-shadow" : "0px 1px 20px #fff"});
+                      .css({"-webkit-box-shadow" : "0px 1px 20px 3px #fff",
+                            "box-shadow" : "0px 1px 20px 3px #fff"});
         
         if ($("#tb_urlbox").length === 1)
         {

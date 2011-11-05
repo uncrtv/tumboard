@@ -7,7 +7,7 @@
  * Licensed under the BSD license, available here: http://bit.ly/vSZSvM
  ******************************************************************************/
 
-ol#posts .post_content
+ol#posts .post
 {
     /* CSS3 animation */
     -webkit-transition: -webkit-box-shadow 0.5s linear;
