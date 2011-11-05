@@ -6,7 +6,9 @@
  * Prototypes class `tumboard' to be initialized later. This class handles
  * all keyboard shortcuts.
  *
- * Tom Cat, 2011.
+ * Copyright 2011, Le Son.
+ * All rights reserved.
+ * Licensed under the BSD license, available here: http://bit.ly/vSZSvM
  ******************************************************************************/
 
 function tumboard()

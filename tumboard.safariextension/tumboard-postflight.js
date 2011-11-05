@@ -7,7 +7,9 @@
  * Key events cannot be hooked in preflight because the page has yet to be
  * loaded.
  *
- * Tom Cat, 2011.
+ * Copyright 2011, Le Son.
+ * All rights reserved.
+ * Licensed under the BSD license, available here: http://bit.ly/vSZSvM
  *******************************************************************************
  */
 
