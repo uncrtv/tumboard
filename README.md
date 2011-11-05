@@ -38,13 +38,11 @@ handle external images? (Send me a pull request if you know!)
 
 To install:
 -----------
-* [For Safari](https://github.com/downloads/precocity/tumboard/tumboard.safariextz)
-* For Chrome: Somehow the pre-packaged extension doesn't work. I am working on
-uploading this to the Chrome Web Store. In the meantime, those who want to try
-this extension can download the source code and, in Chrome, navigate to
-`chrome://extensions`, turn on Developer Mode, then `Load unpacked extension`
-(select the folder `tumboard.safariextension`). That should do the trick for
-now.
+* [For Safari][sdl] (Direct URL)
+* [For Chrome][cdl] (Chrome Web Store)
+
+[sdl]: https://github.com/downloads/precocity/tumboard/tumboard.safariextz
+    "Direct download link for Safari extension"
 
 Download and double-click.
 
@@ -54,3 +52,5 @@ for each browser).
 Who am I?
 ---------
 My name is Tom, and I'm a fabulous cat. Meow!
+Icons for tumboard by [uncreativeboi](http://github.com/uncreativeboi), an
+uncreative boy who happens to be rather creative.
