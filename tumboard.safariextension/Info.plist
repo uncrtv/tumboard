@@ -41,6 +41,7 @@
 			<string>http://www.tumblr.com/dashboard*</string>
 			<string>http://www.tumblr.com/likes*</string>
 			<string>http://www.tumblr.com/tagged*</string>
+			<string>http://www.tumblr.com/blog*</string>
 		</array>
 	</dict>
 	<key>Description</key>
