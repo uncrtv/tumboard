@@ -3,6 +3,8 @@
  * tumboard - Keyboard shortcut for Tumblr dashboard.
  * 
  * Copyright 2011, Le Son.
+ * All rights reserved.
+ * Licensed under the BSD license, available here: http://bit.ly/vSZSvM
  ******************************************************************************/
 
 ol#posts .post
@@ -104,14 +106,22 @@ ol#posts .post
     color: #32B44B !important;
 }
 
-#header #tb_button a
+#tb_button
 {
-    margin-left: 10px !important;
-    margin-right: 10px !important;
+    width: 30px;
+    height: 30px;
+
+    margin: 2px 4px !important;
+}
+
+#tb_button a
+{
+    /*margin-left: 10px !important;
+    margin-right: 10px !important;*/
     opacity: 0.5;
 }
 
-#header #tb_button a:hover
+#tb_button a:hover
 {
     opacity: 1;
 }
