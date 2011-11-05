@@ -4,6 +4,8 @@
  *
  * This script runs after Tumblr dahsboard is loaded.
  * Initializes an instance of class `tumboard' and hooks up javascript events.
+ * Key events cannot be hooked in preflight because the page has yet to be
+ * loaded.
  *
  * Tom Cat, 2011.
  *******************************************************************************
@@ -30,3 +32,16 @@ $("ol#posts li[id*=post_]").click(function() {
     tb.cPostIndex = idx;
     tb.selectPost(tb.cPostIndex);
 });
+
+// Add click event for tab bar button
+$("#tb_button").click(function() {
+    tb.toggleHelpBox();
+});
+
+// HACK: Chrome handles local URL for extensions differently from Safari
+if (typeof safari !== "undefined")
+    var tabbutton_img = safari.extension.baseURI + "Icon-tabbar.png";
+else
+    var tabbutton_img = chrome.extension.getURL("Icon-tabbar.png");
+tabbutton_img = "url(" + tabbutton_img + ")";
+$("#tb_button a").css({"background-image" : tabbutton_img});

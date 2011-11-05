@@ -63,6 +63,29 @@ function tumboard()
     };
 
     /*
+     * Function: toggle help box
+     */
+    this.toggleHelpBox = function()
+    {
+        if ($("#tb_help").length === 1)
+        {
+            $("#tb_help").stop();
+
+            if ($("#tb_help").hasClass("hidden"))
+            {
+                $("#tb_help").css({"pointer-events" : "", "opacity" : 1});
+                $("#tb_help").toggleClass("hidden");
+            }
+            else
+            {
+                $("#tb_help").find("input").blur();
+                $("#tb_help").css({"pointer-events" : "none", "opacity" : 0});
+                $("#tb_help").toggleClass("hidden");
+            }
+        }
+    }
+
+    /*
      * Function: process buffer
      *
      * Key code table
@@ -100,22 +123,7 @@ function tumboard()
         switch (buffer)
         {
             case "h":
-                if ($("#tb_help").length === 1)
-                {
-                    $("#tb_help").stop();
-
-                    if ($("#tb_help").hasClass("hidden"))
-                    {
-                        $("#tb_help").css({"pointer-events" : "", "opacity" : 1});
-                        $("#tb_help").toggleClass("hidden");
-                    }
-                    else
-                    {
-                        $("#tb_help").find("input").blur();
-                        $("#tb_help").css({"pointer-events" : "none", "opacity" : 0});
-                        $("#tb_help").toggleClass("hidden");
-                    }
-                }
+                this.toggleHelpBox();
 
                 this.buffer = "";
                 break;
@@ -383,56 +391,48 @@ function tumboard()
         this.buffer = ""; // command buffer 
 
         // Add semi-transparent black background
-        var veil = document.createElement("div");
-        veil.setAttribute("id", "tb_veil");
-        veil.setAttribute("class", "hidden");
-        veil.setAttribute("style", "opacity: 0; pointer-events: none;");
-        document.getElementsByTagName("body")[0].appendChild(veil);
+        $("body").append($("<div id='tb_veil' class='hidden' style='opacity: 0; pointer-events: none;'></div>"));
 
         // Add hidden URL box
-        var urlbox = document.createElement("div");
-        urlbox.setAttribute("id", "tb_urlbox");
-        urlbox.setAttribute("class", "hidden");
-        urlbox.setAttribute("style", "opacity: 0; pointer-events: none;");
+        var urlbox = $("<div id='tb_urlbox' class='hidden' style='opacity: 0; pointer-events: none;'></div>");
+        
+        var urlbox_text = $("<p style='margin: 10px 20px;'>Permalink for selected post</p>");
+        urlbox.append(urlbox_text);
+        var urlbox_input = $("<input type='text' disabled='disabled'></input>");
+        urlbox.append(urlbox_input);
 
-        var urlbox_text = document.createElement("p");
-        urlbox_text.setAttribute("style", "margin: 10px 20px;");
-        urlbox_text.appendChild(document.createTextNode("Permalink for selected post"));
-        urlbox.appendChild(urlbox_text);
-
-        var urlbox_input = document.createElement("input");
-        urlbox_input.setAttribute("type", "text");
-        urlbox_input.setAttribute("disabled", "disabled");
-        urlbox_input.setAttribute("style", "width: 560px; margin: 0 20px 10px 20px; font-family: 'Georgia', 'Times New Roman', serif; font-size: 1.5em; font-style: italic;");
-        urlbox.appendChild(urlbox_input);
-
-        document.getElementsByTagName("body")[0].appendChild(urlbox);
+        $("body").append(urlbox);
 
         // Add help box
-        var helpbox = document.createElement("div");
-        helpbox.setAttribute("id", "tb_help");
-        helpbox.setAttribute("class", "hidden");
-        helpbox.setAttribute("style", "opacity: 0; pointer-events: none;");
+        var helpbox_html = "<div id='tb_help' class='hidden' style='opacity: 0; pointer-events: none;'></div>";
+        var helpbox = $(helpbox_html);
 
         // Help text
-        helpbox.appendChild($("<p style='text-align: center; font-weight: bold;'>tumboard shortcuts</p>")[0]);
-        helpbox.appendChild($("<p style='margin: 0 20px'><span style='color: #32B44B'>h</span>: Display this help box.</p>")[0]);
-        helpbox.appendChild($("<p style='margin: 0 20px'><span style='color: #32B44B'>D</span>: Go back to page 1 of dashboard.</p>")[0]);
-        helpbox.appendChild($("<p style='margin: 0 20px'><span style='color: #32B44B'>j</span>: Scroll down a post.</p>")[0]);
-        helpbox.appendChild($("<p style='margin: 0 20px'><span style='color: #32B44B'>J</span>: Scroll to last post in page.</p>")[0]);
-        helpbox.appendChild($("<p style='margin: 0 20px'><span style='color: #32B44B'>k</span>: Scroll up a post.</p>")[0]);
-        helpbox.appendChild($("<p style='margin: 0 20px'><span style='color: #32B44B'>K</span>: Scroll to first post in a page.</p>")[0]);
-        helpbox.appendChild($("<p style='margin: 0 20px'><span style='color: #32B44B'>i</span>: Scroll to post currently selected.</p>")[0]);
-        helpbox.appendChild($("<p style='margin: 0 20px'><span style='color: #32B44B'>l</span>: Like/heart a post.</p>")[0]);
-        helpbox.appendChild($("<p style='margin: 0 20px'><span style='color: #32B44B'>r</span>: Reblog a post.</p>")[0]);
-        helpbox.appendChild($("<p style='margin: 0 20px'><span style='color: #32B44B'>R</span>: Reply to post (if applicable).</p>")[0]);
-        helpbox.appendChild($("<p style='margin: 0 20px'><span style='color: #32B44B'>n</span>: Show post's notes.</p>")[0]);
-        helpbox.appendChild($("<p style='margin: 0 20px'><span style='color: #32B44B'>e</span>: Expand inline images.</p>")[0]);
-        helpbox.appendChild($("<p style='margin: 0 20px'><span style='color: #32B44B'>o</span>: Display permalink (for copying).</p>")[0]);
-        helpbox.appendChild($("<p style='margin: 0 20px'><span style='color: #32B44B'>O</span>: Open permalink in a new window/tab.</p>")[0]);
-        helpbox.appendChild($("<p style='margin: 10px 20px'>In addition, you can prepend a number to j and k to scroll down/up more than 1 post.</p>")[0]);
+        helpbox.append($("<p class='help_title'>tumboard shortcuts</p>"));
+        helpbox.append($("<p class='help_item'><span>h</span>: Display this help box.</p>"));
+        helpbox.append($("<p class='help_item'><span>D</span>: Go back to page 1 of dashboard.</p>"));
+        helpbox.append($("<p class='help_item'><span>j</span>: Scroll down a post.</p>"));
+        helpbox.append($("<p class='help_item'><span>J</span>: Scroll to last post in page.</p>"));
+        helpbox.append($("<p class='help_item'><span>k</span>: Scroll up a post.</p>"));
+        helpbox.append($("<p class='help_item'><span>K</span>: Scroll to first post in a page.</p>"));
+        helpbox.append($("<p class='help_item'><span>i</span>: Scroll to post currently selected.</p>"));
+        helpbox.append($("<p class='help_item'><span>l</span>: Like/heart a post.</p>"));
+        helpbox.append($("<p class='help_item'><span>r</span>: Reblog a post.</p>"));
+        helpbox.append($("<p class='help_item'><span>R</span>: Reply to post (if applicable).</p>"));
+        helpbox.append($("<p class='help_item'><span>n</span>: Show post's notes.</p>"));
+        helpbox.append($("<p class='help_item'><span>e</span>: Expand inline images.</p>"));
+        helpbox.append($("<p class='help_item'><span>o</span>: Display permalink (for copying).</p>"));
+        helpbox.append($("<p class='help_item'><span>O</span>: Open permalink in a new window/tab.</p>"));
+        helpbox.append($("<p class='help_item'>In addition, you can prepend a number to j and k to scroll down/up more than 1 post.</p>"));
 
-        document.getElementsByTagName("body")[0].appendChild(helpbox);
+        $("body").append(helpbox);
+
+        // Add tab button
+        var tabbutton_html = "<div class='tab iconic' id='tb_button'>";
+        tabbutton_html += "<a title='tumboard help'>tumboard help</a>";
+        tabbutton_html += "</div>";
+        var tabbutton = $(tabbutton_html);
+        $("#logout_button").before(tabbutton);
 
         // Highlight first post
         this.selectPost(this.cPostIndex);

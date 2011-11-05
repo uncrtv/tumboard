@@ -2,6 +2,12 @@
     "name": "tumboard",
     "version": "1.1",
     "description": "Keyboard shortcuts for Tumblr dashboard.",
+    "icons" :
+        {
+            "16" : "Icon-16.png",
+            "48" : "Icon-48.png",
+           "128" : "Icon.png"
+        },
     "permissions": [
       "http://www.tumblr.com/"
     ],
